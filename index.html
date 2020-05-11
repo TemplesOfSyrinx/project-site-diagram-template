@@ -4,11 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Site Template</title>
+    <style>
+      #graph>svg {
+        display: block;
+        margin: auto;
+      }
+    </style>
 </head>
 
-<body>
+<body id="graph" data-graph="index.gv" data-engine="fdp">
     <h1>Site Template</h1>
+
+    <script src="//d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/viz.js@1.8.2/viz.js" type="javascript/worker"></script>
+    <script src="https://unpkg.com/d3-graphviz@2.6.1/build/d3-graphviz.js"></script>
+    <script>
+        var graphviz = d3.select("#graph").graphviz()
+            .engine()
+            .on('initEnd', function () {
+                render(d3.select("#graph").attr("data-graph"), d3.select("#graph").attr("data-engine"));
+            });
+
+        function render(filename,engine) {
+            // get a text file on a promise and render
+            d3.text(filename).then(function (text) {
+                console.log(text);
+                graphviz.engine(engine).renderDot(text);
+            });
+        }
+    </script>
 </body>
 
 </html>
