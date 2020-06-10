@@ -22,20 +22,7 @@
     <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"
         integrity="sha384-ezbOBm8uJYgjeOZM7uYxYIYFcvXYYBEwUna217FAn/dPySXGpABS7Nt/mW8/pvHb"
         crossorigin="anonymous"></script>
-    <script>
-        var graphviz = d3.select("#graph").graphviz()
-            .engine()
-            .on('initEnd', function () {
-                render(d3.select("#graph").attr("data-graph"), d3.select("#graph").attr("data-engine"));
-            });
-
-        function render(filename, engine) {
-            // get a text file on a promise and render
-            d3.text(filename).then(function (text) {
-                console.log(text);
-                graphviz.engine(engine).renderDot(text);
-            });
-        }
+    <script src="js/graph.js" integrity="sha256-n6J2FSw/P0fIMgzReuAsDPZTwqAJVKZNDG0DUDL3myI=" crossorigin="anonymous">
     </script>
 </body>
 
